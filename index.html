@@ -279,8 +279,8 @@
 
       #slide1 .gif {
         position: absolute;
-        width: min(350px, 85vw);
-        height: min(350px, 85vw);
+        width: min(350px, 65vw);
+        height: min(350px, 65vw);
         object-fit: contain;
         user-select: none;
         filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85));
@@ -649,7 +649,7 @@
         background: transparent;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         padding: 2rem;
         opacity: 0;
@@ -658,6 +658,27 @@
         user-select: none;
         backdrop-filter: brightness(0.6);
         will-change: opacity, background-color;
+      }
+
+      /* Container untuk konten lokasi */
+      #slide4 .location-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Atur posisi vertikal dengan margin-top */
+        margin-top: 30vh; /* Sesuaikan nilai ini */
+        /* Animasi untuk konten */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition-delay: 0.3s;
+      }
+
+      /* Animasi saat overlay visible */
+      #slide4.overlay-visible .location-content {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       #slide4.overlay-visible .overlay {
@@ -924,6 +945,24 @@
         .slide {
           padding: 1rem;
         }
+        
+        #slide1 .names-container {
+          position: absolute;
+          top: 40%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          text-align: center;
+          z-index: 5;
+          opacity: 0;
+          transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition-delay: 0.5s;
+          will-change: opacity;
+        }
 
         /* Landing page */
         #landing-page h1 {
@@ -1034,7 +1073,7 @@
     <div id="landing-page">
       <h1>Undangan Pernikahan</h1>
       <button id="open-invitation">Buka Undangan</button>
-      <span id="guest-name">Kepada Yth: Bapak/Ibu/Saudara/i</span>
+      <span id="guest-name">Kepada <br>Yth: Bapak/Ibu/Saudara/i</span>
     </div>
 
     <!-- Slider -->
@@ -1063,18 +1102,14 @@
           <div class="panel-left left">
             <div class="info-container">
               <h3>Muhammad Imam Arsyawalfa</h3>
-              <p class="info-text">Putra dari Aria Damarwulan</p>
-              <p class="info-text">dan</p>
-              <p class="info-text">Ibu Umi Farida</p>
+              <h4 class="info-text">Putra dari Aria Damarwulan<br><br>dan<br><br>Ibu Umi Farida</h4>
             </div>
           </div>
           <div class="center-divider"></div>
           <div class="panel-right right">
             <div class="info-container">
               <h3>Zahratul Aini Kurniati Fitri</h3>
-              <p class="info-text">Putri dari Bapak H. M. Sulhan Hadi</p>
-              <p class="info-text">dan</p>
-              <p class="info-text">Ibu Salmah (Almarhumah)</p>
+              <h4 class="info-text">Putri dari Bapak H. M. Sulhan Hadi <br><br>dan<br><br>Ibu Salmah (Almarhumah)</h4>
             </div>
           </div>
         </div>
@@ -1085,17 +1120,20 @@
         <div class="overlay">
           <h3>Rangkaian Acara</h3>
           <p>Akad Nikah: Sabtu, 25 Juni 2025</p>
-          <p>Pukul: 08:00 - 10:00 WIB</p>
+          <p>Pukul: 08:30 WITA</p>
           <p>Resepsi: Sabtu, 25 Juni 2025</p>
-          <p>Pukul: 11:00 - 14:00 WIB</p>
+          <p>Pukul: 11:00 - 13:00 WITA</p>
         </div>
       </div>
 
       <!-- Slide 4: Lokasi -->
       <div id="slide4" class="slide">
         <div class="overlay">
-          <h3>Lokasi</h3>
-          <button id="maps-link">Lihat Peta</button>
+           <!-- Tambahkan container baru di sini -->
+            <div class="location-content">
+              <h3>Lokasi</h3>
+              <button id="maps-link">Lihat Peta</button>
+            </div>
         </div>
       </div>
 
@@ -1418,7 +1456,7 @@
         // Maps button
         mapsButton.addEventListener("click", () => {
           // Replace with your actual Google Maps URL
-          const mapsUrl = "https://maps.google.com/?q=Your+Venue+Location";
+          const mapsUrl = "https://maps.app.goo.gl/ZeSJz8KTfvWjvE6m6";
           window.open(mapsUrl, "_blank");
         });
 
