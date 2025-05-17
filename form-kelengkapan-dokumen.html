@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Kelengkapan Dokumen (Checklist) - Universitas PGRI Adi Buana Surabaya</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            max-width: 1300px; /* Diperlebar dari 1200px */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Memastikan lebar kolom konsisten */
+        }
+        
+        .main-table td {
+            border: 1px solid #000;
+            padding: 10px; /* Diperbesar dari 8px untuk memberikan ruang lebih */
+            vertical-align: top;
+        }
+        
+        .inner-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .inner-table td {
+            border: none;
+            padding: 8px 10px; /* Diperbesar sedikit */
+            vertical-align: middle;
+        }
+        
+        .border-bottom {
+            border-bottom: 1px solid #000 !important;
+        }
+        
+        .border-right {
+            border-right: 1px solid #000 !important;
+        }
+        
+        .logo {
+            text-align: center;
+            vertical-align: middle !important;
+            width: 10%; /* Sedikit dikurangi dari 20% */
+        }
+        
+        .logo img {
+            width: 95px; /* Diperbesar dari 85px */
+            height: 95px; /* Diperbesar dari 85px */
+            object-fit: contain;
+        }
+        
+        .university-info {
+            width: 30%; /* Diperlebar untuk informasi universitas */
+        }
+        
+        .code-section {
+            width: 17%; /* Sedikit ditambah dari 15% */
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 25px; /* Diperbesar sedikit */
+            margin-top: 25px; /* Diperbesar sedikit */
+            font-weight: bold;
+        }
+        
+        .green-text {
+            color: #008000;
+        }
+        
+        .no-bottom-border {
+            border-bottom-color: white !important;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-bold {
+            font-weight: bold;
+        }
+        
+        .header-cell {
+            line-height: 1.9; /* Ditingkatkan sedikit dari 1.8 */
+            font-size: 1.05em; /* Ukuran font sedikit diperbesar */
+        }
+        
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .checklist-table th, .checklist-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .col-header {
+            background-color: #f2f2f2;
+        }
+        
+        .main-header {
+            background-color: #e6e6e6;
+        }
+        
+        /* Tambahan untuk nested table */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .info-table td {
+            border: none;
+            padding: 8px 4px;
+        }
+        
+        .info-table .label {
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
+        }
+        
+        .info-table .value {
+            width: 70%;
+        }
+        
+        /* Modifikasi untuk memperlebar lokasi ke kanan */
+        .lokasi-cell {
+            width: 30%; /* Diperlebar dari ukuran default */
+        }
+        
+        /* Modifikasi untuk memperlebar isian di bawah lokasi */
+        .isian-bawah-lokasi {
+            height: 60px; /* Diperbesar tinggi baris */
+        }
+    </style>
+</head>
+<body>
+    <table class="main-table">
+        <tr>
+            <td rowspan="2" class="logo">
+                <img src="https://1.bp.blogspot.com/-9QN4hDujIYk/XzNpP8UybfI/AAAAAAAABJ8/CJniqVcd2SIQYwEEqnXMJ0QGPmRZQWwbgCLcBGAsYHQ/s640/Logo%2BUniversitas%2BPGRI%2BAdi%2BBuana%2BSurabaya%2BUNIPA.png" alt="Logo Universitas PGRI Adi Buana">
+            </td>
+            <td class="no-bottom-border header-cell university-info">
+                <strong>UNIVERSITAS PGRI ADI BUANA Surabaya</strong><br>
+                Jl. Dukuh Menanggal XII, Surabaya, 60234<br>
+                Telp. (031) 8289637, Fax. (031) 8289637
+            </td>
+            <td class="text-center code-section">
+                <br>
+                <strong>KODE</strong>
+            </td>
+        </tr>
+        <tr>
+            <td class="university-info"></td>
+            <td class="text-center green-text code-section"><strong>FM/02/LPM/03</strong></td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>BUKU 5</strong></td>
+            <td class="university-info"><strong>FORM KELENGKAPAN DOKUMEN (CHECKLIST)</strong></td>
+            <td style="padding: 0;" class="code-section">
+                <table class="inner-table">
+                    <tr>
+                        <td style="width: 30%;" class="border-bottom border-right text-bold"><strong>Tanggal</strong></td>
+                        <td class="border-bottom green-text text-bold"><strong>20 Agustus 2020</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="border-right text-bold"><strong>Revisi</strong></td>
+                        <td class="green-text text-bold"><strong>1</strong></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+    <h2>KELENGKAPAN DOKUMEN/<i>CHECKLIST</i></h2>
+    
+    <!-- Auditee Information Table -->
+    <table class="checklist-table">
+        <tr>
+            <th colspan="6"><strong>Auditee</strong></th>
+            <th colspan="4"><strong>Tahap Audit</strong></th>
+        </tr>
+        <tr>
+            <td colspan="6" style="height: 40px;"></td>
+            <td colspan="4" style="height: 40px;"></td>
+        </tr>
+        <tr>
+            <td class="lokasi-cell"><strong>Lokasi</strong></td>
+            <td colspan="5"><strong>Ruang Lingkup</strong></td>
+            <td colspan="5"><strong>Tanggal Audit</strong></td>
+        </tr>
+        <tr>
+            <td class="isian-bawah-lokasi"></td>
+            <td colspan="5" class="isian-bawah-lokasi"></td>
+            <td colspan="5" class="isian-bawah-lokasi"></td>
+        </tr>
+        <tr>
+            <td colspan="1">
+                <table class="info-table">
+                    <tr>
+                        <td class="label"><strong>Wakil Auditee</strong></td>
+                        <td class="value"></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><strong>Auditor Ketua</strong></td>
+                        <td class="value"></td>
+                    </tr>
+                    <tr>
+                        <td class="label" style="vertical-align: top;"><strong>Auditor Anggota</strong></td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+            </td>
+            <td colspan="7"></td>
+        </tr>
+    </table>
+    
+    <!-- Checklist Table (REVISED) -->
+    <table class="checklist-table">
+        <tr class="col-header">
+            <th style="width: 7%;"><strong>No</strong></th>
+            <th style="width: 38%;"><strong>Aspek</strong></th>
+            <th style="width: 5%;"><strong>Ada</strong></th>
+            <th style="width: 7%;"><strong>Tidak ada</strong></th>
+            <th style="width: 24%;"><strong>Nama Dokumen</strong></th>
+            <th style="width: 12%;"><strong>Keterangan</strong></th>
+        </tr>
+        <tr class="col-header">
+            <td><strong>1</strong></td>
+            <td><strong>2</strong></td>
+            <td><strong>3</strong></td>
+            <td><strong>4</strong></td>
+            <td><strong>5</strong></td>
+            <td><strong>6</strong></td>
+        </tr>
+        <tr class="main-header">
+            <td>A.01</td>
+            <td><strong>STANDAR SKL</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>SK Kelulusan, Transkrip nilai /Buku wisuda setiap periode</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Sertifikat kejuaraan mahasiswa</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Laporan tracer study</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>laporan analisis pengguna lulusan</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>SK mahasiswa yang mengikuti program MBKM</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Sertifikat toefl mahasiswa</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>laporan PKM mahasiswa</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>sertifikat penghargaan</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="main-header">
+            <td>A.02</td>
+            <td><strong>STANDAR ISI PEMBELAJARAN</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Kebijakan Pengembangan Kurikulum</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Adanya SK penetapan capaian pembelajaran lulusan</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Pedoman pengembangan kurikulum yang memuat profil lulusan, CP, bahan kajian, struktur kurikulum, dan RPS yang mempertimbangkan isu terkini (pendidikan karakter, SDG, Napza, pendidikan anti korupsi), dan pedoman tentang pengesahan (legalitas) kurikulum</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Adanya Pedoman implemantasi Kurikulum yang mencakup Perencanaan, pemantauan dan peninjauan kurikulum</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>Adanya dokumen proses revitasilasi kurikulum yang melibatkan pemangku kepentingan internal, external, dan direviewe pakar secara berkala tiap 4 s.d 5 tahun</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Adanya dokumen kurikulum yang memuat profil lulusan, capaian pembelajaran yang mengacu prosil lulusan, kesepakatan asosiasi prodi sejenis, level KKNI, struktur MK, peta kurikulum dan capaian pembelajaran MK</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>
