@@ -154,7 +154,7 @@
 
       #guest-name {
         margin-top: 1.2rem;
-        font-size: clamp(0.9rem, 3vw, 1.3rem);
+        font-size: 20px;
         font-style: italic;
         user-select: text;
         letter-spacing: 0.03em;
@@ -163,6 +163,16 @@
         animation: fadeInUp 1.2s forwards 1.3s;
         transition: all 0.4s ease;
         display: block !important;
+      }
+
+      .guest-name-text {
+        margin-top: 1rem;
+        font-size: 70px;
+        font-family: 'Great Vibes', cursive;
+        font-weight: normal;
+        display: block;
+        text-align: center;
+        color: white;
       }
 
       #guest-name:hover {
@@ -1310,6 +1320,7 @@
     <div id="landing-page">
       <h1>Undangan Pernikahan</h1>
       <button id="open-invitation">Buka Undangan</button>
+      <br>
       <span id="guest-name">Kepada <br />Yth: Bapak/Ibu/Saudara/i</span>
     </div>
 
@@ -1382,7 +1393,9 @@
               <p>11:00 - 13:00 WITA</p>
             </div>
             <div class="event-section">
-              <p>Lokasi Sepadia Hotel and Convention<br>Jalan Majapahit Mataram</p>
+              <p>
+                Lokasi Sepadia Hotel and Convention<br />Jalan Majapahit Mataram
+              </p>
             </div>
           </div>
         </div>
@@ -1873,6 +1886,17 @@
         // Push initial state
         history.pushState(null, document.title, window.location.href);
       });
+      // Ambil parameter dari URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const guestName = urlParams.get("name");
+
+      if (guestName) {
+        const guestSpan = document.getElementById("guest-name");
+        const nameElement = document.createElement("div");
+        nameElement.className = "guest-name-text";
+        nameElement.textContent = decodeURIComponent(guestName);
+        guestSpan.appendChild(nameElement);
+      }
     </script>
   </body>
 </html>
