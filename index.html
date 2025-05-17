@@ -228,8 +228,8 @@
     
     #slide1 .gif {
       position: absolute;
-      width: 260px;
-      height: 260px;
+      width: 320px;
+      height: 320px;
       object-fit: contain;
       user-select: none;
       filter: drop-shadow(0 0 8px rgba(255,255,255,0.85));
@@ -362,6 +362,35 @@
     
     #slide2.right-panel-visible .panel-right {
       width: 50%;
+    }
+    
+    /* Garis pemisah di tengah */
+    #slide2 .center-divider {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%) scaleY(0);
+      width: 1px;
+      height: 80%;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255, 255, 255, 0.4) 10%,
+        rgba(255, 255, 255, 0.9) 50%,
+        rgba(255, 255, 255, 0.4) 90%,
+        transparent
+      );
+      opacity: 0;
+      transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+                  opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+      z-index: 10;
+    }
+    
+    /* Animasi garis pemisah */
+    #slide2.center-divider-visible .center-divider {
+      transform: translateX(-50%) scaleY(1);
+      opacity: 1;
     }
     
     /* Konten informasi mempelai */
@@ -930,17 +959,20 @@
         <div class="panel-left">
           <div class="left">
             <div class="info-container">
-              <h3>Mempelai Pria</h3>
+              <h3>Mempelai</h3>
+              <h3>Pria</h3>
               <p class="info-text">Nama: Muhammad Imam Arsyawalfa</p>
               <p class="info-text">Ayah: Aria Damarwulan</p>
               <p class="info-text">Ibu: Umi Farida</p>
             </div>
           </div>
         </div>
+        <div class="center-divider"></div>
         <div class="panel-right">
           <div class="right">
             <div class="info-container">
-              <h3>Mempelai Wanita</h3>
+              <h3>Mempelai</h3>
+              <h3>Wanita</h3>
               <p class="info-text">Nama: Zahratul Aini Kurniati Fitri</p>
               <p class="info-text">Ayah: H. M. Sulhan Hadi</p>
               <p class="info-text">Ibu: Salmah (Almarhumah)</p>
@@ -1082,6 +1114,7 @@
           slide.classList.remove('right-panel-visible');
           slide.classList.remove('left-content-visible');
           slide.classList.remove('right-content-visible');
+          slide.classList.remove('center-divider-visible');
         });
 
         // Set previous, current and next slides for the animation
@@ -1106,7 +1139,8 @@
             slide.classList.add('overlay-visible');
           }, 500);
         } else if(slide.id === 'slide2') {
-          // Animasi baru: pertama overlay kiri muncul, lalu konten kiri, kemudian overlay kanan, lalu konten kanan
+          // Animasi baru: pertama overlay kiri muncul, lalu konten kiri, 
+          // lalu garis pembatas, kemudian overlay kanan, lalu konten kanan
           setTimeout(() => {
             // Panel kiri muncul
             slide.classList.add('left-panel-visible');
@@ -1116,14 +1150,19 @@
               slide.classList.add('left-content-visible');
               
               setTimeout(() => {
-                // Panel kanan muncul
-                slide.classList.add('right-panel-visible');
+                // Garis pembatas muncul
+                slide.classList.add('center-divider-visible');
                 
                 setTimeout(() => {
-                  // Konten kanan muncul
-                  slide.classList.add('right-content-visible');
-                }, 500);
-              }, 800);
+                  // Panel kanan muncul
+                  slide.classList.add('right-panel-visible');
+                  
+                  setTimeout(() => {
+                    // Konten kanan muncul
+                    slide.classList.add('right-content-visible');
+                  }, 500);
+                }, 400);
+              }, 400);
             }, 500);
           }, 300);
         } else if(slide.id === 'slide3') {
@@ -1273,4 +1312,3 @@
   </script>
 </body>
 </html>
-          
