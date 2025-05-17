@@ -1,1297 +1,1694 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Undangan Pernikahan</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap');
-    /* Reset and base */
-    * {
-      box-sizing: border-box;
-    }
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: black;
-      color: white;
-      font-family: 'Montserrat', Arial, sans-serif;
-      font-weight: 500; /* Default font weight set to medium for all text */
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+    /></noscript>
+    <title>Undangan Pernikahan</title>
+    <style>
+      /* Tambahkan di bagian awal CSS */
+      html {
+        touch-action: manipulation; /* Meningkatkan responsivitas touch di mobile */
+        -webkit-text-size-adjust: 100%; /* Mencegah pembesaran teks otomatis di iOS */
+      }
 
-    /* Font sambung untuk judul */
-    h1, h2, h3 {
-      font-family: 'Great Vibes', cursive;
-      margin-top: 0;
-      margin-bottom: 0.5em;
-      user-select: none;
-      text-shadow:
-        0 2px 6px rgba(0,0,0,0.9),
-        0 0 10px rgba(255,255,255,0.2);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    h1:hover, h2:hover, h3:hover {
-      text-shadow:
-        0 3px 10px rgba(255,255,255,0.5),
-        0 0 20px rgba(255,255,255,0.6);
-      transform: scale(1.03);
-    }
+      /* Animasi yang lebih efisien untuk perangkat mobile */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
 
-    #landing-page {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 1rem;
-      background: linear-gradient(135deg, #222222, #111111);
-      background-attachment: fixed;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    /* Landing page animation elements */
-    .flower-petal {
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 10;
-      filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
-    }
-    
-    #landing-page h1 {
-      font-size: 4.5rem;
-      margin-bottom: 1.2rem;
-      letter-spacing: 0.05em;
-      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 1.2s forwards 0.3s;
-    }
-    
-    #landing-page button {
-      cursor: pointer;
-      background-color: rgba(255, 255, 255, 0.15);
-      border: 2px solid white;
-      color: white;
-      font-size: 1.4rem;
-      padding: 0.85rem 2.5rem;
-      border-radius: 40px;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-      box-shadow:
-        0 0 8px rgba(255,255,255,0.7);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 1.2s forwards 0.8s;
-    }
-    #landing-page button:hover,
-    #landing-page button:focus {
-      background-color: white;
-      color: black;
-      box-shadow:
-        0 0 20px rgba(255,255,255,1);
-      transform: translateY(-3px) scale(1.05);
-      outline: none;
-    }
-    #landing-page button:active {
-      transform: translateY(0) scale(0.98);
-    }
-    
-    #guest-name {
-      margin-top: 1.2rem;
-      font-size: 1.3rem;
-      font-style: italic;
-      user-select: text;
-      letter-spacing: 0.03em;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1.2s forwards 1.3s;
-      transition: all 0.4s ease;
-    }
-    #guest-name:hover {
-      letter-spacing: 0.045em;
-    }
-    
-    /* Animation keyframes */
-    @keyframes fadeInUp {
-      to {
+      @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap");
+
+      /* Reset and base */
+      * {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: black;
+        color: white;
+        font-family: "Montserrat", Arial, sans-serif;
+        font-weight: 500; /* Default font weight set to medium for all text */
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Font sambung untuk judul */
+      h1,
+      h2,
+      h3 {
+        font-family: "Great Vibes", cursive !important;
+        margin-top: 0;
+        margin-bottom: 0.5em;
+        user-select: none;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9),
+          0 0 10px rgba(255, 255, 255, 0.2);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      /* Tambahan untuk memastikan semua judul slide menggunakan font sambung */
+      #slide1 h3,
+      #slide2 h3,
+      #slide3 h3,
+      #slide4 h3 {
+        font-family: "Great Vibes", cursive !important;
+      }
+      /* Memastikan nama mempelai menggunakan font sambung */
+      #slide1 .name-text,
+      #slide1 .name-and,
+      #slide2 .panel-left h3,
+      #slide2 .panel-right h3 {
+        font-family: "Great Vibes", cursive !important;
+         text-shadow: 
+          0 0 10px rgba(0, 0, 0, 0.5),
+          0 0 15px rgba(255, 255, 255, 1),
+          0 0 20px rgba(255, 255, 255, 0.8);
+      }
+      /* Judul mempelai pria/wanita juga menggunakan font sambung */
+      #slide2 .info-container h3 {
+        font-family: "Great Vibes", cursive !important;
+      }
+
+      h1:hover,
+      h2:hover,
+      h3:hover {
+        text-shadow: 0 3px 10px rgba(255, 255, 255, 0.5),
+          0 0 20px rgba(255, 255, 255, 0.6);
+        transform: scale(1.03);
+      }
+
+      #landing-page {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 1rem;
+        background: linear-gradient(135deg, #222222, #111111);
+        background-attachment: fixed;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Landing page animation elements */
+      .flower-petal {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+      }
+
+      #landing-page h1 {
+        font-size: 4.5rem;
+        margin-bottom: 1.2rem;
+        letter-spacing: 0.05em;
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform: translateY(20px);
+        opacity: 0;
+        animation: fadeInUp 1.2s forwards 0.3s;
+      }
+
+      #landing-page button {
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 2px solid white;
+        color: white;
+        font-size: 1.4rem;
+        padding: 0.85rem 2.5rem;
+        border-radius: 40px;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform: translateY(20px);
+        opacity: 0;
+        animation: fadeInUp 1.2s forwards 0.8s;
+      }
+
+      #landing-page button:hover,
+      #landing-page button:focus {
+        background-color: white;
+        color: black;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        transform: translateY(-3px) scale(1.05);
+        outline: none;
+      }
+
+      #landing-page button:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      #guest-name {
+        margin-top: 1.2rem;
+        font-size: 1.3rem;
+        font-style: italic;
+        user-select: text;
+        letter-spacing: 0.03em;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1.2s forwards 1.3s;
+        transition: all 0.4s ease;
+      }
+
+      #guest-name:hover {
+        letter-spacing: 0.045em;
+      }
+
+      /* Animation keyframes */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatPetal {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translate(var(--translateX), var(--translateY))
+            rotate(var(--rotate));
+          opacity: 0;
+        }
+      }
+
+      /* Slider container */
+      #slider {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: none;
+        font-weight: normal;
+        background-attachment: fixed;
+      }
+
+      /* Each slide */
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+        transition: transform 1.25s cubic-bezier(0.645, 0.045, 0.355, 1),
+          opacity 1.25s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+        opacity: 0;
+        transform: scale(1.08);
+        pointer-events: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        user-select: none;
+        padding: 2rem;
+        flex-direction: column;
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+
+      .slide.prev {
+        transform: scale(0.92) translateX(-5%);
+      }
+
+      .slide.next {
+        transform: scale(0.92) translateX(5%);
+      }
+
+      /* Overlays */
+
+      /* Slide 1 Overlay */
+      #slide1 .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2rem;
+        padding-top: 4rem;
+        opacity: 0;
+        transition: all 1.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        pointer-events: none;
+        backdrop-filter: brightness(0.6);
+        border-radius: 0;
+      }
+
+      #slide1.overlay-visible .overlay {
+        background-color: rgba(0, 0, 0, 0.2);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Nama dan Lingkaran bunga dalam 1 container */
+      #slide1 .center-container {
+        position: relative;
+        width: 260px;
+        height: 310px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 8rem;
+      }
+
+      #slide1 .gif {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        object-fit: contain;
+        user-select: none;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85));
+        border-radius: 50%;
+        z-index: 1;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+        top: 0;
+      }
+
+      #slide1.overlay-visible .gif {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      #slide1 .names-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+        opacity: 0;
+        transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition-delay: 0.5s;
+      }
+
+      #slide1.overlay-visible .names-container {
+        opacity: 1;
+      }
+
+      #slide1 .name-text {
+        font-family: "Great Vibes", cursive;
+        font-size: 2.5rem;
+        letter-spacing: 0.08em;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 1),
+          0 0 20px rgba(255, 255, 255, 0.7);
+        line-height: 1.1;
+        margin: 0;
+        padding: 0;
+        transition: all 0.4s ease;
+      }
+
+      #slide1 .name-text:hover {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+          0 0 30px rgba(255, 255, 255, 0.9);
+        transform: scale(1.05);
+      }
+
+      #slide1 .name-and {
+        font-family: "Great Vibes", cursive;
+        font-size: 2.2rem;
+        margin: 0.1rem 0;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 1),
+          0 0 20px rgba(255, 255, 255, 0.7);
+      }
+
+      /* Ucapan dengan styling yang lebih natural - posisi bawah */
+      #slide1 p {
+        font-size: 1.2rem;
+        max-width: 400px;
+        margin-top: auto;
+        margin-bottom: 3rem;
+        line-height: 1.6;
+        font-style: italic;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition-delay: 0.8s;
+        letter-spacing: 0.04em;
+        text-align: center;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.95);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      #slide1.overlay-visible p {
         opacity: 1;
         transform: translateY(0);
       }
-    }
-    
-    @keyframes floatPetal {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
+
+      /* Slide 2 Overlay - Pembaruan animasi dan tampilan */
+      #slide2 .main-container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 4rem;
+        pointer-events: none;
+        user-select: text;
+      }
+
+      /* Overlay panel untuk sisi kiri dan kanan */
+      #slide2 .panel-left,
+      #slide2 .panel-right {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 0; /* Mulai dengan lebar 0 */
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #slide2 .panel-left {
+        left: 0;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      #slide2 .panel-right {
+        right: 0;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      /* Animasi panel muncul bertahap */
+      #slide2.left-panel-visible .panel-left {
+        width: 50%;
+      }
+
+      #slide2.right-panel-visible .panel-right {
+        width: 50%;
+      }
+
+      /* Garis pemisah di tengah */
+      #slide2 .center-divider {
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translateX(-50%) scaleY(0);
+        width: 1px;
+        height: 80%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255, 255, 255, 0.4) 10%,
+          rgba(255, 255, 255, 0.9) 50%,
+          rgba(255, 255, 255, 0.4) 90%,
+          transparent
+        );
+        opacity: 0;
+        transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+          opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+        z-index: 10;
+      }
+
+      /* Animasi garis pemisah */
+      #slide2.center-divider-visible .center-divider {
+        transform: translateX(-50%) scaleY(1);
+        opacity: 1;
+      }
+
+      /* Konten informasi mempelai */
+      #slide2 .info-container {
+        position: relative;
+        width: 320px;
+        max-width: 90%;
+        padding: 2rem;
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition-delay: 0.4s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Animasi konten */
+      #slide2.left-content-visible .left .info-container,
+      #slide2.right-content-visible .right .info-container {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Heading dan konten */
+      #slide2 h3 {
+        font-family: "Great Vibes", cursive;
+        font-size: 2.7rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 1),
+          0 0 25px rgba(255, 255, 255, 0.7);
+        user-select: none;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-align: center;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition-delay: 0.2s;
+      }
+
+      #slide2.left-content-visible .left h3,
+      #slide2.right-content-visible .right h3 {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #slide2 h3:hover {
+        transform: scale(1.05);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+          0 0 30px rgba(255, 255, 255, 0.9);
+      }
+
+      #slide2 .info-text {
+        width: 100%;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.5s ease;
+      }
+
+      #slide2.left-content-visible .left .info-text,
+      #slide2.right-content-visible .right .info-text {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #slide2 .left .info-text:nth-child(2) {
+        transition-delay: 0.5s;
+      }
+      #slide2 .left .info-text:nth-child(3) {
+        transition-delay: 0.7s;
+      }
+      #slide2 .left .info-text:nth-child(4) {
+        transition-delay: 0.9s;
+      }
+
+      #slide2 .right .info-text:nth-child(2) {
+        transition-delay: 0.5s;
+      }
+      #slide2 .right .info-text:nth-child(3) {
+        transition-delay: 0.7s;
+      }
+      #slide2 .right .info-text:nth-child(4) {
+        transition-delay: 0.9s;
+      }
+
+      #slide2 p {
+        margin: 12px 0;
+        letter-spacing: 0.02em;
+        position: relative;
+        padding-left: 0;
+        transition: all 0.3s ease;
+        font-weight: 600; /* Bold font weight for text */
+        font-size: 1.05rem;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+      }
+
+      #slide2 p:hover {
+        padding-left: 8px;
+        text-shadow: 0 1px 5px rgba(255, 255, 255, 0.4);
+      }
+
+      #slide2 p:after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.7);
+        transition: width 0.4s ease;
+      }
+
+      #slide2 p:hover:after {
+        width: 100%;
+      }
+
+      /* Slide 3 Overlay */
+      #slide3 .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 42%;
+        background: rgba(255, 255, 255, 0.1);
+        border-top-left-radius: 50% 110%;
+        border-top-right-radius: 50% 110%;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 3rem;
+        text-align: center;
+        font-size: 1.4rem;
+        user-select: none;
+        box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.1);
+        backdrop-filter: saturate(300%) blur(10px);
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform: translateY(20px);
         opacity: 0;
       }
-      10% {
-        opacity: 0.8;
+
+      #slide3.active .overlay {
+        transform: translateY(0);
+        opacity: 1;
       }
-      100% {
-        transform: translate(var(--translateX), var(--translateY)) rotate(var(--rotate));
+
+      #slide3 h3 {
+        font-size: 3rem;
+        margin-bottom: 0.75em;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.92);
+        user-select: none;
+        position: relative;
+        display: inline-block;
+      }
+
+      #slide3 h3:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 10%;
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.8),
+          transparent
+        );
+      }
+
+      #slide3 p {
+        margin: 0.5em 0;
+        font-weight: 600; /* Bold text untuk semua paragraf */
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.5s ease;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+      }
+
+      #slide3.active p {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      #slide3.active p:nth-child(2) {
+        transition-delay: 0.3s;
+      }
+      #slide3.active p:nth-child(3) {
+        transition-delay: 0.5s;
+      }
+      #slide3.active p:nth-child(4) {
+        transition-delay: 0.7s;
+      }
+      #slide3.active p:nth-child(5) {
+        transition-delay: 0.9s;
+      }
+
+      /* Slide 4 Overlay */
+      #slide4 .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        opacity: 0;
+        transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        pointer-events: none;
+        user-select: none;
+        border-radius: 0;
+        backdrop-filter: brightness(0.6);
+      }
+
+      #slide4.overlay-visible .overlay {
+        background-color: rgba(0, 0, 0, 0.28);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      #slide4 h3 {
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 14px rgba(255, 255, 255, 0.9);
+        user-select: none;
+        transform: translateY(-20px);
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      #slide4.overlay-visible h3 {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      #slide4 button {
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 3px solid white;
+        color: white;
+        font-size: 1.4rem;
+        padding: 1rem 3rem;
+        border-radius: 40px;
+        letter-spacing: 0.04em;
+        font-weight: 600;
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        user-select: none;
+        outline-offset: 3px;
+        transform: translateY(20px);
         opacity: 0;
       }
-    }
 
-    /* Slider container */
-    #slider {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      display: none;
-      font-weight: normal;
-      background-attachment: fixed;
-    }
+      #slide4.overlay-visible button {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: 0.3s;
+      }
 
-    /* Each slide */
-    .slide {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center center;
-      transition: transform 1.25s cubic-bezier(0.645, 0.045, 0.355, 1), 
-                  opacity 1.25s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
-      opacity: 0;
-      transform: scale(1.08);
-      pointer-events: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      user-select: none;
-      padding: 2rem;
-      flex-direction: column;
-    }
-    .slide.active {
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
-    }
-    .slide.prev {
-      transform: scale(0.92) translateX(-5%);
-    }
-    .slide.next {
-      transform: scale(0.92) translateX(5%);
-    }
+      #slide4 button:hover,
+      #slide4 button:focus {
+        background-color: white;
+        color: black;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+        transform: translateY(-3px) scale(1.05);
+        outline: none;
+      }
 
-    /* Overlays */
+      #slide4 button:active {
+        transform: translateY(0) scale(0.98);
+      }
 
-    /* Slide 1 Overlay */
-    #slide1 .overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: transparent;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 2rem;
-      padding-top: 4rem;
-      opacity: 0;
-      transition: all 1.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
-      backdrop-filter: brightness(0.6);
-      border-radius: 0;
-    }
-    #slide1.overlay-visible .overlay {
-      background-color: rgba(0,0,0,0.2);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    
-    /* Nama dan Lingkaran bunga dalam 1 container */
-    #slide1 .center-container {
-      position: relative;
-      width: 260px;
-      height: 310px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 8rem;
-    }
-    
-    #slide1 .gif {
-      position: absolute;
-      width: 350px;
-      height: 350px;
-      object-fit: contain;
-      user-select: none;
-      filter: drop-shadow(0 0 8px rgba(255,255,255,0.85));
-      border-radius: 50%;
-      z-index: 1;
-      opacity: 0;
-      transform: scale(0.8);
-      transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
-      top: 0;
-    }
-    #slide1.overlay-visible .gif {
-      opacity: 1;
-      transform: scale(1);
-    }
-    
-    #slide1 .names-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 2;
-      opacity: 0;
-      transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
-      transition-delay: 0.5s;
-    }
-    
-    #slide1.overlay-visible .names-container {
-      opacity: 1;
-    }
-    
-    #slide1 .name-text {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.5rem;
-      letter-spacing: 0.08em;
-      text-shadow:
-        0 0 15px rgba(255, 255, 255, 1),
-        0 0 20px rgba(255, 255, 255, 0.7);
-      line-height: 1.1;
-      margin: 0;
-      padding: 0;
-      transition: all 0.4s ease;
-    }
-    
-    #slide1 .name-text:hover {
-      text-shadow:
-        0 0 20px rgba(255, 255, 255, 1),
-        0 0 30px rgba(255, 255, 255, 0.9);
-      transform: scale(1.05);
-    }
-    
-    #slide1 .name-and {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.2rem;
-      margin: 0.1rem 0;
-      text-shadow:
-        0 0 15px rgba(255, 255, 255, 1),
-        0 0 20px rgba(255, 255, 255, 0.7);
-    }
-    
-    /* Ucapan dengan styling yang lebih natural - posisi bawah */
-    #slide1 p {
-      font-size: 1.2rem;
-      max-width: 400px;
-      margin-top: auto;
-      margin-bottom: 3rem;
-      line-height: 1.6;
-      font-style: italic;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
-      transition-delay: 0.8s;
-      letter-spacing: 0.04em;
-      text-align: center;
-      font-weight: 300;
-      color: rgba(255, 255, 255, 0.95);
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    }
-    #slide1.overlay-visible p {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* PERUBAHAN: Slide 2 Overlay - Pembaruan animasi dan tampilan berdasarkan gambar contoh */
-    #slide2 .main-container {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 4rem;
-      pointer-events: none;
-      user-select: text;
-    }
-    
-    /* Overlay panel untuk sisi kiri dan kanan */
-    #slide2 .panel-left,
-    #slide2 .panel-right {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 0; /* Mulai dengan lebar 0 */
-      background-color: rgba(0,0,0,0.6);
-      backdrop-filter: blur(3px);
-      transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    #slide2 .panel-left {
-      left: 0;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
-    
-    #slide2 .panel-right {
-      right: 0;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-    }
-    
-    /* Animasi panel muncul bertahap */
-    #slide2.left-panel-visible .panel-left {
-      width: 50%;
-    }
-    
-    #slide2.right-panel-visible .panel-right {
-      width: 50%;
-    }
-    
-    /* Garis pemisah di tengah */
-    #slide2 .center-divider {
-      position: absolute;
-      top: 15%;
-      left: 50%;
-      transform: translateX(-50%) scaleY(0);
-      width: 1px;
-      height: 80%;
-      background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(255, 255, 255, 0.4) 10%,
-        rgba(255, 255, 255, 0.9) 50%,
-        rgba(255, 255, 255, 0.4) 90%,
-        transparent
-      );
-      opacity: 0;
-      transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-                  opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
-      z-index: 10;
-    }
-    
-    /* Animasi garis pemisah */
-    #slide2.center-divider-visible .center-divider {
-      transform: translateX(-50%) scaleY(1);
-      opacity: 1;
-    }
-    
-    /* Konten informasi mempelai */
-    #slide2 .info-container {
-      position: relative;
-      width: 320px;
-      max-width: 90%;
-      padding: 2rem;
-      opacity: 0;
-      transform: scale(0.9);
-      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-      transition-delay: 0.4s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    /* Animasi konten */
-    #slide2.left-content-visible .left .info-container,
-    #slide2.right-content-visible .right .info-container {
-      opacity: 1;
-      transform: scale(1);
-    }
-    
-    /* Heading dan konten */
-    #slide2 h3 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.7rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.05em;
-      text-shadow:
-        0 0 15px rgba(255,255,255,1),
-        0 0 25px rgba(255,255,255,0.7);
-      user-select: none;
-      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      text-align: center;
-      opacity: 0;
-      transform: translateY(-20px);
-      transition-delay: 0.2s;
-    }
-    
-    #slide2.left-content-visible .left h3,
-    #slide2.right-content-visible .right h3 {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    #slide2 h3:hover {
-      transform: scale(1.05);
-      text-shadow:
-        0 0 20px rgba(255,255,255,1),
-        0 0 30px rgba(255,255,255,0.9);
-    }
-    
-    #slide2 .info-text {
-      width: 100%;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.5s ease;
-    }
-    
-    #slide2.left-content-visible .left .info-text,
-    #slide2.right-content-visible .right .info-text {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    #slide2 .left .info-text:nth-child(2) { transition-delay: 0.5s; }
-    #slide2 .left .info-text:nth-child(3) { transition-delay: 0.7s; }
-    #slide2 .left .info-text:nth-child(4) { transition-delay: 0.9s; }
-    
-    #slide2 .right .info-text:nth-child(2) { transition-delay: 0.5s; }
-    #slide2 .right .info-text:nth-child(3) { transition-delay: 0.7s; }
-    #slide2 .right .info-text:nth-child(4) { transition-delay: 0.9s; }
-    
-    #slide2 p {
-      margin: 12px 0;
-      letter-spacing: 0.02em;
-      position: relative;
-      padding-left: 0;
-      transition: all 0.3s ease;
-      font-weight: 600; /* Bold font weight for text */
-      font-size: 1.05rem;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-    }
-    
-    #slide2 p:hover {
-      padding-left: 8px;
-      text-shadow: 0 1px 5px rgba(255, 255, 255, 0.4);
-    }
-    
-    #slide2 p:after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: rgba(255,255,255,0.7);
-      transition: width 0.4s ease;
-    }
-    
-    #slide2 p:hover:after {
-      width: 100%;
-    }
-    
-    #slide2 h3 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.5rem;
-      margin-bottom: 1.2rem;
-      letter-spacing: 0.05em;
-      text-shadow:
-        0 0 10px rgba(255,255,255,0.9);
-      user-select: none;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      text-align: center;
-    }
-    
-    #slide2 h3:hover {
-      transform: scale(1.05);
-      text-shadow:
-        0 0 15px rgba(255,255,255,1);
-    }
-    
-    #slide2 p {
-      margin: 12px 0;
-      letter-spacing: 0.02em;
-      position: relative;
-      padding-left: 0;
-      transition: all 0.3s ease;
-      font-weight: 600; /* Bold font weight for text */
-      font-size: 1.05rem;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-    }
-    
-    #slide2 p:hover {
-      padding-left: 8px;
-      text-shadow: 0 1px 5px rgba(255, 255, 255, 0.4);
-    }
-    
-    #slide2 p:after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: rgba(255,255,255,0.7);
-      transition: width 0.4s ease;
-    }
-    
-    #slide2 p:hover:after {
-      width: 100%;
-    }
-
-    /* Slide 3 Overlay */
-    #slide3 .overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0; right: 0;
-      height: 42%;
-      background: rgba(255,255,255,0.1);
-      border-top-left-radius: 50% 110%;
-      border-top-right-radius: 50% 110%;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem 3rem;
-      text-align: center;
-      font-size: 1.4rem;
-      user-select: none;
-      box-shadow:
-        inset 0 0 50px rgba(255,255,255,0.1);
-      backdrop-filter: saturate(300%) blur(10px);
-      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    #slide3.active .overlay {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    #slide3 h3 {
-      font-size: 3rem;
-      margin-bottom: 0.75em;
-      letter-spacing: 0.05em;
-      text-shadow:
-        0 0 10px rgba(255,255,255,0.92);
-      user-select: none;
-      position: relative;
-      display: inline-block;
-    }
-    #slide3 h3:after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 10%;
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(90deg, 
-        transparent, rgba(255,255,255,0.8), transparent);
-    }
-
-    #slide3 p {
-      margin: 0.5em 0;
-      font-weight: 600; /* Bold text untuk semua paragraf */
-      transform: translateY(20px);
-      opacity: 0;
-      transition: all 0.5s ease;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-    }
-    #slide3.active p {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    #slide3.active p:nth-child(2) { transition-delay: 0.3s; }
-    #slide3.active p:nth-child(3) { transition-delay: 0.5s; }
-    #slide3.active p:nth-child(4) { transition-delay: 0.7s; }
-    #slide3.active p:nth-child(5) { transition-delay: 0.9s; }
-
-    /* Slide 4 Overlay */
-    #slide4 .overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: transparent;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      opacity: 0;
-      transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
-      user-select: none;
-      border-radius: 0;
-      backdrop-filter: brightness(0.6);
-    }
-    #slide4.overlay-visible .overlay {
-      background-color: rgba(0,0,0,0.28);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #slide4 h3 {
-      font-size: 3.5rem;
-      margin-bottom: 2rem;
-      letter-spacing: 0.05em;
-      text-shadow:
-        0 0 14px rgba(255, 255, 255, 0.9);
-      user-select: none;
-      transform: translateY(-20px);
-      opacity: 0;
-      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    #slide4.overlay-visible h3 {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    #slide4 button {
-      cursor: pointer;
-      background-color: rgba(255, 255, 255, 0.15);
-      border: 3px solid white;
-      color: white;
-      font-size: 1.4rem;
-      padding: 1rem 3rem;
-      border-radius: 40px;
-      letter-spacing: 0.04em;
-      font-weight: 600;
-      box-shadow:
-        0 0 16px rgba(255,255,255,0.85);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      user-select: none;
-      outline-offset: 3px;
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    #slide4.overlay-visible button {
-      transform: translateY(0);
-      opacity: 1;
-      transition-delay: 0.3s;
-    }
-    #slide4 button:hover,
-    #slide4 button:focus {
-      background-color: white;
-      color: black;
-      box-shadow:
-        0 0 25px rgba(255,255,255,1);
-      transform: translateY(-3px) scale(1.05);
-      outline: none;
-    }
-    #slide4 button:active {
-      transform: translateY(0) scale(0.98);
-    }
-
-    /* Navigation buttons - Arrow only style - BOLD */
-    .nav-button {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: transparent;
-      border: none;
-      color: rgba(255,255,255,0.8);
-      font-size: 2.8rem;
-      font-weight: bold;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 1100;
-      user-select: none;
-      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      text-shadow: 0 0 15px rgba(0,0,0,0.7), 0 0 5px rgba(255,255,255,0.5);
-      outline-offset: 5px;
-      opacity: 0.7;
-    }
-    .nav-button:hover,
-    .nav-button:focus {
-      color: rgba(255,255,255,1);
-      outline: none;
-      transform: translateY(-50%) scale(1.15);
-      text-shadow: 0 0 20px rgba(255,255,255,0.7);
-      opacity: 0.95;
-    }
-    .nav-button:active {
-      transform: translateY(-50%) scale(0.95);
-    }
-    #prev {
-      left: 15px;
-    }
-    #next {
-      right: 15px;
-    }
-
-    /* Music control button - Light theme */
-    #music-control {
-      position: fixed;
-      bottom: 1.3rem;
-      right: 1.3rem;
-      background-color: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.4);
-      color: white;
-      font-size: 1.8rem;
-      padding: 0.6rem;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      z-index: 1200;
-      cursor: pointer;
-      user-select: none;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      outline-offset: 3px;
-      opacity: 0.6;
-    }
-    #music-control:hover,
-    #music-control:focus {
-      background-color: rgba(255,255,255,0.85);
-      color: black;
-      outline: none;
-      transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(255,255,255,0.5);
-      opacity: 0.9;
-    }
-    #music-control:active {
-      transform: scale(0.95);
-    }
-    #music-control svg {
-      fill: currentColor;
-      width: 24px;
-      height: 24px;
-      transition: transform 0.3s ease;
-    }
-    
-    /* Animation for sound icon */
-    .sound-wave {
-      position: absolute;
-      border: 2px solid rgba(255,255,255,0.6);
-      border-radius: 50%;
-      opacity: 0;
-      pointer-events: none;
-    }
-    #music-control[aria-pressed="true"] .sound-wave {
-      animation: sound-wave 2s linear infinite;
-    }
-    @keyframes sound-wave {
-      0% {
-        width: 0px;
-        height: 0px;
+      /* Navigation buttons - Arrow only style - BOLD */
+      .nav-button {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 2.8rem;
+        font-weight: bold;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1100;
+        user-select: none;
+        transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-shadow: 0 0 15px rgba(0, 0, 0, 0.7),
+          0 0 5px rgba(255, 255, 255, 0.5);
+        outline-offset: 5px;
         opacity: 0.7;
       }
-      100% {
-        width: 100px;
-        height: 100px;
-        opacity: 0;
-      }
-    }
 
-    /* Responsive font and sizes */
-    @media screen and (max-width: 700px) {
-      #landing-page h1 {
-        font-size: 3.5rem;
+      .nav-button:hover,
+      .nav-button:focus {
+        color: rgba(255, 255, 255, 1);
+        outline: none;
+        transform: translateY(-50%) scale(1.15);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        opacity: 0.95;
       }
-      #landing-page button {
-        font-size: 1.3rem;
-        padding: 0.65rem 2rem;
+
+      .nav-button:active {
+        transform: translateY(-50%) scale(0.95);
       }
-      #guest-name {
-        font-size: 1.1rem;
+
+      #prev {
+        left: 15px;
       }
-      #slide1 .center-container {
-        width: 220px;
-        height: 270px;
-        margin-bottom: 6rem;
+
+      #next {
+        right: 15px;
       }
-      #slide1 .gif {
-        width: 220px;
-        height: 220px;
-      }
-      #slide1 .name-text {
-        font-size: 2.2rem;
-      }
-      #slide1 .name-and {
-        font-size: 1.9rem;
-      }
-      #slide1 p {
-        font-size: 1.1rem;
-        max-width: 320px;
-      }
-      #slide2 h3 {
-        font-size: 2rem;
-      }
-      #slide2 .overlay {
-        padding: 1rem 2rem;
-      }
-      #slide2 .overlay .left,
-      #slide2 .overlay .right {
-        font-size: 1rem;
-        width: 240px;
-        padding: 1.6rem 2rem;
-      }
-      #slide3 h3 {
-        font-size: 2.2rem;
-      }
-      #slide3 .overlay {
-        height: 48%;
-        font-size: 1.1rem;
-        padding: 1.8rem 2rem;
-      }
-      #slide4 h3 {
-        font-size: 2.5rem;
-      }
-      #slide4 button {
-        font-size: 1.2rem;
-        padding: 0.8rem 2.5rem;
-      }
-      .nav-button {
-        font-size: 2.5rem;
-      }
+
+      /* Music control button - Light theme */
       #music-control {
+        position: fixed;
+        bottom: 1.3rem;
+        right: 1.3rem;
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: white;
         font-size: 1.8rem;
+        padding: 0.6rem;
         width: 42px;
         height: 42px;
-        padding: 0.5rem;
+        border-radius: 50%;
+        z-index: 1200;
+        cursor: pointer;
+        user-select: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        outline-offset: 3px;
+        opacity: 0.6;
       }
-    }
-    @media screen and (max-width: 400px) {
-      #landing-page h1 {
-        font-size: 2.6rem;
-      }
-      #landing-page button {
-        font-size: 1.1rem;
-        padding: 0.55rem 1.6rem;
-      }
-      #guest-name {
-        font-size: 0.9rem;
-      }
-      #slide1 .center-container {
-        width: 180px;
-        height: 230px;
-        margin-bottom: 5rem;
-      }
-      #slide1 .gif {
-        width: 180px;
-        height: 180px;
-      }
-      #slide1 .name-text {
-        font-size: 1.8rem;
-      }
-      #slide1 .name-and {
-        font-size: 1.6rem;
-      }
-      #slide1 p {
-        font-size: 0.95rem;
-        max-width: 260px;
-      }
-      #slide2 h3 {
-        font-size: 1.6rem;
-      }
-      #slide2 .overlay {
-        padding: 1rem;
-      }
-      #slide2 .overlay .left,
-      #slide2 .overlay .right {
-        font-size: 0.85rem;
-        width: 180px;
-        padding: 1.2rem 1.6rem;
-      }
-      #slide3 h3 {
-        font-size: 1.8rem;
-      }
-      #slide3 .overlay {
-        height: 55%;
-        font-size: 1rem;
-        padding: 1.2rem 1rem;
-      }
-      #slide4 h3 {
-        font-size: 1.8rem;
-      }
-      #slide4 button {
-        font-size: 1rem;
-        padding: 0.6rem 1.8rem;
-      }
-      .nav-button {
-        font-size: 2rem;
-      }
-      #music-control {
-        font-size: 1.4rem;
-        width: 36px;
-        height: 36px;
-        padding: 0.4rem;
-      }
-    }
-  </style>
-</head>
-<body>
 
-  <section id="landing-page">
-    <h1>Undangan Pernikahan</h1>
-    <button id="open-invitation" aria-label="Buka Undangan">Buka Undangan</button>
-    <p id="guest-name" aria-live="polite" aria-atomic="true"></p>
-  </section>
+      #music-control:hover,
+      #music-control:focus {
+        background-color: rgba(255, 255, 255, 0.85);
+        color: black;
+        outline: none;
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        opacity: 0.9;
+      }
 
-  <section id="slider" aria-label="Undangan Pernikahan Slides" aria-live="polite" aria-atomic="true">
-    <article id="slide1" class="slide" style="background-image: url('background_0.jpg');" aria-hidden="true" tabindex="-1" role="group" aria-roledescription="slide" aria-label="Sambutan">
-      <div class="overlay">
-                 <div class="center-container">
-          <img src="tempat_nama.gif" alt="Lingkaran bunga" class="gif" />
-          <div class="names-container">
-            <span class="name-text">Imam</span>
-            <span class="name-and">&amp;</span>
-            <span class="name-text">Zahra</span>
+      #music-control:active {
+        transform: scale(0.95);
+      }
+
+      #music-control svg {
+        fill: currentColor;
+        width: 24px;
+        height: 24px;
+        transition: transform 0.3s ease;
+      }
+
+      /* Animation for sound icon */
+      .sound-wave {
+        position: absolute;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #music-control[aria-pressed="true"] .sound-wave {
+        animation: sound-wave 2s linear infinite;
+      }
+
+      @keyframes sound-wave {
+        0% {
+          width: 0px;
+          height: 0px;
+          opacity: 0.7;
+        }
+        100% {
+          width: 100px;
+          height: 100px;
+          opacity: 0;
+        }
+      }
+
+      /* Responsive font and sizes */
+      @media screen and (max-width: 768px) {
+        /* Perbaikan umum */
+        .slide {
+          padding: 1rem;
+        }
+
+        /* Perbaikan slide 1 - Sambutan */
+        #slide1 .center-container {
+          width: 200px;
+          height: 240px;
+          margin-bottom: 4rem;
+        }
+
+        #slide1 .gif {
+          width: 220px;
+          height: 220px;
+        }
+
+        #slide1 .name-text {
+          font-size: 2rem;
+        }
+
+        #slide1 .name-and {
+          font-size: 1.7rem;
+        }
+
+        #slide1 p {
+          font-size: 1rem;
+          max-width: 280px;
+          margin-bottom: 2rem;
+        }
+
+        /* Perbaikan slide 2 - Mempelai */
+        #slide2 .main-container {
+          padding: 1rem;
+        }
+
+        #slide2.left-panel-visible .panel-left,
+        #slide2.right-panel-visible .panel-right {
+          width: 50%;
+        }
+
+        #slide2 .info-container {
+          width: 100%;
+          padding: 1rem;
+        }
+
+        #slide2 h3 {
+          font-size: 2rem;
+          margin-bottom: 0.8rem;
+        }
+
+        #slide2 p {
+          font-size: 0.9rem;
+          margin: 8px 0;
+        }
+
+        /* Perbaikan slide 3 - Rangkaian Acara */
+        #slide3 .overlay {
+          height: 45%;
+          padding: 1.5rem 1rem;
+        }
+
+        #slide3 h3 {
+          font-size: 2.2rem;
+          margin-bottom: 0.6em;
+        }
+
+        #slide3 p {
+          font-size: 1rem;
+          margin: 0.4em 0;
+        }
+
+        /* Perbaikan slide 4 - Lokasi */
+        #slide4 h3 {
+          font-size: 2.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        #slide4 button {
+          font-size: 1.2rem;
+          padding: 0.8rem 2rem;
+        }
+
+        /* Perbaikan navigasi */
+        .nav-button {
+          font-size: 2.5rem;
+        }
+
+        #music-control {
+          font-size: 1.8rem;
+          width: 42px;
+          height: 42px;
+          padding: 0.5rem;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        /* Perbaikan umum */
+        .nav-button {
+          font-size: 2rem;
+          width: 32px;
+          height: 32px;
+        }
+
+        /* Perbaikan landing page */
+        #landing-page h1 {
+          font-size: 3.5rem;
+        }
+
+        #landing-page button {
+          font-size: 1.3rem;
+          padding: 0.65rem 2rem;
+        }
+
+        #guest-name {
+          font-size: 1.1rem;
+        }
+
+        /* Perbaikan slide 1 - Sambutan */
+        #slide1 .center-container {
+          width: 220px; /* Sesuaikan dengan ukuran gif */
+          height: 240px; /* Sesuaikan dengan ukuran gif */
+          margin-bottom: 3rem;
+        }
+
+        #slide1 .gif {
+          width: 210px; /* Lebih besar dari sebelumnya (180px) */
+          height: 210px; /* Lebih besar dari sebelumnya (180px) */
+          top: -5px; /* Sedikit geser ke atas */
+        }
+
+ /* Tambahan penyesuaian untuk posisi yang lebih presisi */
+#slide1 .names-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  z-index: 5; /* Pastikan berada di atas gif */
+}
+
+  
+  /* Sesuaikan ukuran font nama agar proporsional */
+  #slide1 .name-text {
+    font-size: 1.9rem; /* Sedikit lebih besar dari sebelumnya */
+  }
+  
+  #slide1 .name-and {
+    font-size: 1.7rem; /* Sedikit lebih besar dari sebelumnya */
+  }
+
+        #slide1 p {
+          font-size: 0.9rem;
+          max-width: 250px;
+          margin-bottom: 1.5rem;
+        }
+
+        /* Perbaikan slide 2 - Mempelai */
+        #slide2 .main-container {
+          padding: 0.5rem;
+        }
+
+        #slide2.left-panel-visible .panel-left,
+        #slide2.right-panel-visible .panel-right {
+          width: 50%;
+        }
+
+        #slide2 .info-container {
+          padding: 0.5rem;
+        }
+
+        #slide2 h3 {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+        }
+
+        #slide2 p {
+          font-size: 0.75rem;
+          margin: 6px 0;
+          line-height: 1.3;
+        }
+
+        /* Perbaikan slide 3 - Rangkaian Acara */
+        #slide3 .overlay {
+          height: 50%;
+          padding: 1rem 0.8rem;
+          border-top-left-radius: 35% 80%;
+          border-top-right-radius: 35% 80%;
+        }
+
+        #slide3 h3 {
+          font-size: 1.8rem;
+          margin-bottom: 0.5em;
+        }
+
+        #slide3 p {
+          font-size: 0.9rem;
+          margin: 0.3em 0;
+        }
+
+        /* Perbaikan slide 4 - Lokasi */
+        #slide4 h3 {
+          font-size: 2rem;
+          margin-bottom: 1.2rem;
+        }
+
+        #slide4 button {
+          font-size: 1rem;
+          padding: 0.6rem 1.5rem;
+        }
+
+        /* Perbaikan kontrol musik */
+        #music-control {
+          font-size: 1.4rem;
+          width: 36px;
+          height: 36px;
+          padding: 0.4rem;
+        }
+      }
+
+      @media screen and (max-width: 360px) {
+        /* Perbaikan landing page */
+        #landing-page h1 {
+          font-size: 2.6rem;
+        }
+
+        #landing-page button {
+          font-size: 1.1rem;
+          padding: 0.55rem 1.6rem;
+        }
+
+        #guest-name {
+          font-size: 0.9rem;
+        }
+
+        /* Perbaikan slide 1 - Sambutan */
+        #slide1 .center-container {
+    width: 200px;
+    height: 220px;
+        }
+
+  #slide1 .gif {
+    width: 190px;
+    height: 190px;
+  }
+
+       #slide1 .name-text {
+    font-size: 1.7rem;
+  }
+  
+  #slide1 .name-and {
+    font-size: 1.5rem;
+  }
+
+        #slide1 p {
+          font-size: 0.8rem;
+          max-width: 220px;
+          margin-bottom: 1rem;
+        }
+
+        /* Perbaikan slide 2 - Mempelai */
+        #slide2 .center-divider {
+          height: 70%;
+        }
+
+        #slide2 h3 {
+          font-size: 1.3rem;
+          margin-bottom: 0.4rem;
+        }
+
+        #slide2 p {
+          font-size: 0.7rem;
+          margin: 5px 0;
+        }
+
+        /* Perbaikan slide 3 - Rangkaian Acara */
+        #slide3 .overlay {
+          height: 55%;
+          padding: 0.8rem 0.6rem;
+        }
+
+        #slide3 h3 {
+          font-size: 1.5rem;
+        }
+
+        #slide3 p {
+          font-size: 0.8rem;
+          margin: 0.25em 0;
+        }
+
+        /* Perbaikan slide 4 - Lokasi */
+        #slide4 h3 {
+          font-size: 1.7rem;
+          margin-bottom: 1rem;
+        }
+
+        #slide4 button {
+          font-size: 0.9rem;
+          padding: 0.5rem 1.2rem;
+        }
+      }
+
+      /* Perbaikan untuk orientasi landscape pada mobile */
+      @media screen and (max-height: 480px) and (orientation: landscape) {
+        #slide1 .center-container {
+          width: 150px;
+          height: 180px;
+          margin-bottom: 0.5rem;
+        }
+
+        #slide1 .gif {
+          width: 150px;
+          height: 150px;
+        }
+
+        #slide1 p {
+          margin-bottom: 0.5rem;
+        }
+
+        #slide2 .panel-left,
+        #slide2 .panel-right {
+          top: 5%;
+          bottom: 5%;
+        }
+
+        #slide2 h3 {
+          font-size: 1.5rem;
+          margin-bottom: 0.3rem;
+        }
+
+        #slide3 .overlay {
+          height: 65%;
+        }
+
+        #slide3 h3 {
+          font-size: 1.7rem;
+          margin-bottom: 0.3em;
+        }
+
+        #slide3 p {
+          margin: 0.2em 0;
+        }
+
+        #slide4 h3 {
+          font-size: 1.8rem;
+          margin-bottom: 0.8rem;
+        }
+      }
+
+      /* Perbaikan tambahan untuk perangkat high-DPI */
+      @media screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2),
+        screen and (max-width: 480px) and (min-resolution: 192dpi) {
+        #slide2 p {
+          letter-spacing: 0;
+        }
+
+        #slide2 .info-container {
+          transform: scale(0.95);
+        }
+
+        #slide1 .name-text,
+        #slide1 .name-and,
+        #slide2 h3,
+        #slide3 h3,
+        #slide4 h3 {
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+      }
+
+      /* Animasi fadeIn/fadeOut */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section id="landing-page">
+      <h1>Undangan Pernikahan</h1>
+      <button id="open-invitation" aria-label="Buka Undangan">
+        Buka Undangan
+      </button>
+      <p id="guest-name" aria-live="polite" aria-atomic="true"></p>
+    </section>
+
+    <section
+      id="slider"
+      aria-label="Undangan Pernikahan Slides"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <article
+        id="slide1"
+        class="slide"
+        style="background-image: url('background_0.jpg')"
+        aria-hidden="true"
+        tabindex="-1"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="Sambutan"
+      >
+        <div class="overlay">
+          <div class="center-container">
+            <img src="tempat_nama.gif" alt="Lingkaran bunga" class="gif" />
+            <div class="names-container">
+              <span class="name-text">Imam</span>
+              <span class="name-and">&amp;</span>
+              <span class="name-text">Zahra</span>
+            </div>
           </div>
+          <p>Kami berharap kehadiran Anda melengkapi kebahagiaan kami.</p>
         </div>
-        <p>Kami berharap kehadiran Anda melengkapi kebahagiaan kami.</p>
-      </div>
-    </article>
+      </article>
 
-    <article id="slide2" class="slide" style="background-image: url('background_1.jpeg');" aria-hidden="true" tabindex="-1" role="group" aria-roledescription="slide" aria-label="Mempelai">
-      <div class="main-container">
-        <div class="panel-left">
-          <div class="left">
-            <div class="info-container">
-              <h3>Mempelai</h3>
-              <h3>Pria</h3>
-              <p class="info-text">Nama: Muhammad Imam Arsyawalfa</p>
-              <p class="info-text">Ayah: Aria Damarwulan</p>
-              <p class="info-text">Ibu: Umi Farida</p>
+      <article
+        id="slide2"
+        class="slide"
+        style="background-image: url('background_1.jpeg')"
+        aria-hidden="true"
+        tabindex="-1"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="Mempelai"
+      >
+        <div class="main-container">
+          <div class="panel-left">
+            <div class="left">
+              <div class="info-container">
+                <h3>Mempelai</h3>
+                <h3>Pria</h3>
+                <p class="info-text">Nama: Muhammad Imam Arsyawalfa</p>
+                <p class="info-text">Ayah: Aria Damarwulan</p>
+                <p class="info-text">Ibu: Umi Farida</p>
+              </div>
+            </div>
+          </div>
+          <div class="center-divider"></div>
+          <div class="panel-right">
+            <div class="right">
+              <div class="info-container">
+                <h3>Mempelai</h3>
+                <h3>Wanita</h3>
+                <p class="info-text">Nama: Zahratul Aini Kurniati Fitri</p>
+                <p class="info-text">Ayah: H. M. Sulhan Hadi</p>
+                <p class="info-text">Ibu: Salmah (Almarhumah)</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="center-divider"></div>
-        <div class="panel-right">
-          <div class="right">
-            <div class="info-container">
-              <h3>Mempelai</h3>
-              <h3>Wanita</h3>
-              <p class="info-text">Nama: Zahratul Aini Kurniati Fitri</p>
-              <p class="info-text">Ayah: H. M. Sulhan Hadi</p>
-              <p class="info-text">Ibu: Salmah (Almarhumah)</p>
-            </div>
-          </div>
+      </article>
+
+      <article
+        id="slide3"
+        class="slide"
+        style="background-image: url('background_2.jpeg')"
+        aria-hidden="true"
+        tabindex="-1"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="Rangkaian Acara"
+      >
+        <div class="overlay">
+          <h3>Rangkaian Acara</h3>
+          <p>Akad Nikah</p>
+          <p>Resepsi</p>
+          <p>Tanggal: 24 Mei 2025</p>
+          <p>Lokasi: Narmada Convention Hall</p>
         </div>
-      </div>
-    </article>
+      </article>
 
-    <article id="slide3" class="slide" style="background-image: url('background_2.jpeg');" aria-hidden="true" tabindex="-1" role="group" aria-roledescription="slide" aria-label="Rangkaian Acara">
-      <div class="overlay">
-        <h3>Rangkaian Acara</h3>
-        <p>Akad Nikah</p>
-        <p>Resepsi</p>
-        <p>Tanggal: 24 Mei 2025</p>
-        <p>Lokasi: Narmada Convention Hall</p>
-      </div>
-    </article>
+      <article
+        id="slide4"
+        class="slide"
+        style="background-image: url('background_3.JPG')"
+        aria-hidden="true"
+        tabindex="-1"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="Lokasi"
+      >
+        <div class="overlay">
+          <h3>Lokasi</h3>
+          <button id="location-btn" aria-label="Lihat Lokasi di Google Maps">
+            Lihat Lokasi
+          </button>
+        </div>
+      </article>
 
-    <article id="slide4" class="slide" style="background-image: url('background_3.JPG');" aria-hidden="true" tabindex="-1" role="group" aria-roledescription="slide" aria-label="Lokasi">
-      <div class="overlay">
-        <h3>Lokasi</h3>
-        <button id="location-btn" aria-label="Lihat Lokasi di Google Maps">Lihat Lokasi</button>
-      </div>
-    </article>
+      <button
+        id="prev"
+        class="nav-button"
+        aria-label="Slide Sebelumnya"
+        title="Sebelumnya"
+      >
+        &lt;
+      </button>
+      <button
+        id="next"
+        class="nav-button"
+        aria-label="Slide Berikutnya"
+        title="Berikutnya"
+      >
+        &gt;
+      </button>
+    </section>
 
-    <button id="prev" class="nav-button" aria-label="Slide Sebelumnya" title="Sebelumnya">&lt;</button>
-    <button id="next" class="nav-button" aria-label="Slide Berikutnya" title="Berikutnya">&gt;</button>
-  </section>
+    <button
+      id="music-control"
+      aria-label="Kontrol Musik"
+      title="Kontrol Musik"
+      aria-pressed="false"
+    >
+      <div class="sound-wave"></div>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path id="icon-path" d="M3 9v6h4l5 5V4L7 9H3z"></path>
+        <path
+          id="icon-wave"
+          d="M16 7c1.66 0 3 1.34 3 3s-1.34 3-3 3V7z M19 7c1.66 0 3 1.34 3 3s-1.34 3-3 3V7z"
+        ></path>
+      </svg>
+    </button>
+    <audio id="background-music" src="backgroundsound.mp3" loop></audio>
 
-  <button id="music-control" aria-label="Kontrol Musik" title="Kontrol Musik" aria-pressed="false">
-    <div class="sound-wave"></div>
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path id="icon-path" d="M3 9v6h4l5 5V4L7 9H3z"></path>
-      <path id="icon-wave" d="M16 7c1.66 0 3 1.34 3 3s-1.34 3-3 3V7z M19 7c1.66 0 3 1.34 3 3s-1.34 3-3 3V7z"></path>
-    </svg>
-  </button>
-  <audio id="background-music" src="backgroundsound.mp3" loop></audio>
+    <script>
+      (() => {
+        // Elements
+        const landingPage = document.getElementById("landing-page");
+        const slider = document.getElementById("slider");
+        const guestNameEl = document.getElementById("guest-name");
+        const openBtn = document.getElementById("open-invitation");
+        const slides = Array.from(document.querySelectorAll(".slide"));
+        const prevBtn = document.getElementById("prev");
+        const nextBtn = document.getElementById("next");
+        const musicBtn = document.getElementById("music-control");
+        const audio = document.getElementById("background-music");
+        const locationBtn = document.getElementById("location-btn");
+        const iconPath = document.getElementById("icon-path");
+        const iconWave = document.getElementById("icon-wave");
 
-  <script>
-    (() => {
-      // Elements
-      const landingPage = document.getElementById('landing-page');
-      const slider = document.getElementById('slider');
-      const guestNameEl = document.getElementById('guest-name');
-      const openBtn = document.getElementById('open-invitation');
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const prevBtn = document.getElementById('prev');
-      const nextBtn = document.getElementById('next');
-      const musicBtn = document.getElementById('music-control');
-      const audio = document.getElementById('background-music');
-      const locationBtn = document.getElementById('location-btn');
-      const iconPath = document.getElementById('icon-path');
-      const iconWave = document.getElementById('icon-wave');
+        // Paths for speaker icon states
+        const icons = {
+          play: "M3 9v6h4l5 5V4L7 9H3z", // speaker shape
+          pause: "M6 19h4V5H6v14zm8-14v14h4V5h-4z", // pause bars
+        };
 
-      // Paths for speaker icon states
-      const icons = {
-        play: "M3 9v6h4l5 5V4L7 9H3z", // speaker shape
-        pause: "M6 19h4V5H6v14zm8-14v14h4V5h-4z" // pause bars
-      };
+        // State
+        let currentIndex = 0;
+        let slideInterval = null;
+        let slideDuration = 7000; // 7 seconds per slide
 
-      // State
-      let currentIndex = 0;
-      let slideInterval = null;
-      let slideDuration = 7000; // 7 seconds per slide
-      
-      // Create animated flower petals on landing page
-      function createFlowerPetals() {
-        const colors = ['#ffcce6', '#ffb3d9', '#ff99cc', '#ff80bf', '#ff66b3'];
-        const petalTypes = [
-          'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\'><path fill=\'%23ffffff\' d=\'M10,0 C12,5 15,8 20,10 C15,12 12,15 10,20 C8,15 5,12 0,10 C5,8 8,5 10,0 z\'/></svg>")',
-          'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\'><path fill=\'%23ffffff\' d=\'M10,0 C14,3 17,6 20,10 C17,14 14,17 10,20 C6,17 3,14 0,10 C3,6 6,3 10,0 z\'/></svg>")'
-        ];
-        
-        const petalContainer = landingPage;
-        
-        for (let i = 0; i < 20; i++) {
-          const petal = document.createElement('div');
-          petal.classList.add('flower-petal');
-          
-          // Random attributes
-          const size = 15 + Math.random() * 20; // 15-35px
-          const xPos = Math.random() * 100; // 0-100%
-          const delay = Math.random() * 5; // 0-5s
-          const duration = 5 + Math.random() * 10; // 5-15s
-          const xTravel = -50 + Math.random() * 100; // -50 to 50%
-          const yTravel = 50 + Math.random() * 50; // 50-100%
-          const rotation = Math.random() * 360; // 0-360deg
-          
-          // Set styles
-          petal.style.left = `${xPos}%`;
-          petal.style.top = '-20px';
-          petal.style.width = `${size}px`;
-          petal.style.height = `${size}px`;
-          petal.style.backgroundImage = petalTypes[Math.floor(Math.random() * petalTypes.length)];
-          petal.style.setProperty('--translateX', `${xTravel}%`);
-          petal.style.setProperty('--translateY', `${yTravel}vh`);
-          petal.style.setProperty('--rotate', `${rotation}deg`);
-          petal.style.animation = `floatPetal ${duration}s ease-in-out ${delay}s infinite`;
-          
-          petalContainer.appendChild(petal);
-        }
-      }
+        // Create animated flower petals on landing page
+        function createFlowerPetals() {
+          const colors = [
+            "#ffcce6",
+            "#ffb3d9",
+            "#ff99cc",
+            "#ff80bf",
+            "#ff66b3",
+          ];
+          const petalTypes = [
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='%23ffffff' d='M10,0 C12,5 15,8 20,10 C15,12 12,15 10,20 C8,15 5,12 0,10 C5,8 8,5 10,0 z'/></svg>\")",
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='%23ffffff' d='M10,0 C14,3 17,6 20,10 C17,14 14,17 10,20 C6,17 3,14 0,10 C3,6 6,3 10,0 z'/></svg>\")",
+          ];
 
-      // Get guest name from URL (last path segment)
-      function getGuestName() {
-        const path = window.location.pathname;
-        const parts = path.split('/');
-        let name = parts.filter(Boolean).pop() || '';
-        name = decodeURIComponent(name);
-        // sanitize simple: only letters, numbers, spaces, dash underscore
-        name = name.replace(/[^a-zA-Z0-9 \-_]/g, '');
-        return name;
-      }
+          const petalContainer = landingPage;
 
-      function updateGuestName() {
-        const name = getGuestName();
-        if(name) {
-          guestNameEl.textContent = `Kepada Yth. Bapak/Ibu/Saudara ${name}`;
-        } else {
-          guestNameEl.textContent = '';
-        }
-      }
+          for (let i = 0; i < 20; i++) {
+            const petal = document.createElement("div");
+            petal.classList.add("flower-petal");
 
-      // Show slide by index with overlay animation
-      function showSlide(index) {
-        if(index < 0) index = slides.length -1;
-        if(index >= slides.length) index = 0;
-        
-        // Reset all slides
-        slides.forEach((slide, i) => {
-          slide.classList.remove('active', 'prev', 'next');
-          slide.setAttribute('aria-hidden', 'true');
-          slide.setAttribute('tabindex', '-1');
-          slide.classList.remove('overlay-visible');
-          
-          // Hapus semua class yang terkait slide 2
-          slide.classList.remove('left-panel-visible');
-          slide.classList.remove('right-panel-visible');
-          slide.classList.remove('left-content-visible');
-          slide.classList.remove('right-content-visible');
-          slide.classList.remove('center-divider-visible');
-        });
+            // Random attributes
+            const size = 15 + Math.random() * 20; // 15-35px
+            const xPos = Math.random() * 100; // 0-100%
+            const delay = Math.random() * 5; // 0-5s
+            const duration = 5 + Math.random() * 10; // 5-15s
+            const xTravel = -50 + Math.random() * 100; // -50 to 50%
+            const yTravel = 50 + Math.random() * 50; // 50-100%
+            const rotation = Math.random() * 360; // 0-360deg
 
-        // Set previous, current and next slides for the animation
-        const prevIndex = (index - 1 + slides.length) % slides.length;
-        const nextIndex = (index + 1) % slides.length;
-        
-        slides[prevIndex].classList.add('prev');
-        slides[nextIndex].classList.add('next');
-        
-        // Activate current slide
-        const slide = slides[index];
-        slide.classList.add('active');
-        slide.setAttribute('aria-hidden', 'false');
-        slide.setAttribute('tabindex', '0');
-        currentIndex = index;
+            // Set styles
+            petal.style.left = `${xPos}%`;
+            petal.style.top = "-20px";
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.backgroundImage =
+              petalTypes[Math.floor(Math.random() * petalTypes.length)];
+            petal.style.setProperty("--translateX", `${xTravel}%`);
+            petal.style.setProperty("--translateY", `${yTravel}vh`);
+            petal.style.setProperty("--rotate", `${rotation}deg`);
+            petal.style.animation = `floatPetal ${duration}s ease-in-out ${delay}s infinite`;
 
-        // Overlay animations depending on slide
-        if(slide.id === 'slide1') {
-          // overlay fullscreen appears after 500ms delay
-          slide.classList.remove('overlay-visible');
-          setTimeout(() => {
-            slide.classList.add('overlay-visible');
-          }, 500);
-        } else if(slide.id === 'slide2') {
-          // Animasi baru: pertama overlay kiri muncul, lalu konten kiri, 
-          // lalu garis pembatas, kemudian overlay kanan, lalu konten kanan
-          setTimeout(() => {
-            // Panel kiri muncul
-            slide.classList.add('left-panel-visible');
-            
-            setTimeout(() => {
-              // Konten kiri muncul
-              slide.classList.add('left-content-visible');
-              
-              setTimeout(() => {
-                // Garis pembatas muncul
-                slide.classList.add('center-divider-visible');
-                
-                setTimeout(() => {
-                  // Panel kanan muncul
-                  slide.classList.add('right-panel-visible');
-                  
-                  setTimeout(() => {
-                    // Konten kanan muncul
-                    slide.classList.add('right-content-visible');
-                  }, 500);
-                }, 400);
-              }, 400);
-            }, 500);
-          }, 300);
-        } else if(slide.id === 'slide3') {
-          // overlay animates with slide entrance
-          // handled by CSS animation tied to .active class
-        } else if(slide.id === 'slide4') {
-          slide.classList.remove('overlay-visible');
-          setTimeout(() => {
-            slide.classList.add('overlay-visible');
-          }, 400);
-        }
-      }
-
-      // Automatic slide advancing
-      function startSlideShow() {
-        stopSlideShow(); // Clear any existing interval
-        slideInterval = setInterval(() => {
-          showSlide(currentIndex + 1);
-        }, slideDuration);
-      }
-      
-      function stopSlideShow() {
-        if (slideInterval) {
-          clearInterval(slideInterval);
-        }
-      }
-
-      // Event listeners
-      openBtn.addEventListener('click', () => {
-        // Start opening animation
-        landingPage.style.animation = 'fadeOut 1s forwards';
-        
-        setTimeout(() => {
-          landingPage.style.display = 'none';
-          slider.style.display = 'flex';
-          slider.style.animation = 'fadeIn 1.5s forwards';
-          
-          // Show first slide
-          showSlide(0);
-          startSlideShow();
-
-          // autoplay music start immediately on open
-          audio.play().then(() => {
-            musicBtn.setAttribute('aria-pressed', 'true');
-            setPauseIcon();
-          }).catch(() => {
-            musicBtn.setAttribute('aria-pressed', 'false');
-            setPlayIcon();
-          });
-        }, 800);
-      });
-
-      prevBtn.addEventListener('click', () => {
-        stopSlideShow();
-        showSlide(currentIndex - 1);
-        startSlideShow();
-      });
-      
-      nextBtn.addEventListener('click', () => {
-        stopSlideShow();
-        showSlide(currentIndex + 1);
-        startSlideShow();
-      });
-
-      musicBtn.addEventListener('click', () => {
-        if(audio.paused) {
-          audio.play();
-          musicBtn.setAttribute('aria-pressed', 'true');
-          setPauseIcon();
-        } else {
-          audio.pause();
-          musicBtn.setAttribute('aria-pressed', 'false');
-          setPlayIcon();
-        }
-      });
-
-      locationBtn.addEventListener('click', () => {
-        window.open('https://maps.app.goo.gl/rvvafqdujQbSMUnR6', '_blank');
-      });
-
-      // Keyboard shortcuts for slides
-      document.addEventListener('keydown', e => {
-        if (slider.style.display === 'flex') {
-          if(e.key === 'ArrowLeft') {
-            e.preventDefault();
-            prevBtn.click();
-          } else if(e.key === 'ArrowRight') {
-            e.preventDefault();
-            nextBtn.click();
+            petalContainer.appendChild(petal);
           }
         }
-      });
 
-      // Touch swipe support for mobile
-      let touchStartX = 0;
-      let touchEndX = 0;
-      
-      slider.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, false);
-      
-      slider.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, false);
-      
-      function handleSwipe() {
-        if (touchEndX < touchStartX - 50) { // Swipe left
-          nextBtn.click();
+        // Get guest name from URL (last path segment)
+        function getGuestName() {
+          const path = window.location.pathname;
+          const parts = path.split("/");
+          let name = parts.filter(Boolean).pop() || "";
+          name = decodeURIComponent(name);
+          // sanitize simple: only letters, numbers, spaces, dash underscore
+          name = name.replace(/[^a-zA-Z0-9 \-_]/g, "");
+          return name;
         }
-        if (touchEndX > touchStartX + 50) { // Swipe right
-          prevBtn.click();
+
+        function updateGuestName() {
+          const name = getGuestName();
+          if (name) {
+            guestNameEl.textContent = `Kepada Yth. Bapak/Ibu/Saudara ${name}`;
+          } else {
+            guestNameEl.textContent = "";
+          }
         }
-      }
 
-      // Icon updates
-      function setPlayIcon() {
-        iconPath.setAttribute('d', icons.play);
-        iconWave.style.opacity = 0;
-      }
-      
-      function setPauseIcon() {
-        iconPath.setAttribute('d', icons.pause);
-        iconWave.style.opacity = 1;
-      }
+        // Show slide by index with overlay animation
+        function showSlide(index) {
+          if (index < 0) index = slides.length - 1;
+          if (index >= slides.length) index = 0;
 
-      // Add fadeIn/fadeOut animations
-      const style = document.createElement('style');
-      style.textContent = `
+          // Reset all slides
+          slides.forEach((slide, i) => {
+            slide.classList.remove("active", "prev", "next");
+            slide.setAttribute("aria-hidden", "true");
+            slide.setAttribute("tabindex", "-1");
+            slide.classList.remove("overlay-visible");
+
+            // Hapus semua class yang terkait slide 2
+            slide.classList.remove("left-panel-visible");
+            slide.classList.remove("right-panel-visible");
+            slide.classList.remove("left-content-visible");
+            slide.classList.remove("right-content-visible");
+            slide.classList.remove("center-divider-visible");
+          });
+
+          // Set previous, current and next slides for the animation
+          const prevIndex = (index - 1 + slides.length) % slides.length;
+          const nextIndex = (index + 1) % slides.length;
+
+          slides[prevIndex].classList.add("prev");
+          slides[nextIndex].classList.add("next");
+
+          // Activate current slide
+          const slide = slides[index];
+          slide.classList.add("active");
+          slide.setAttribute("aria-hidden", "false");
+          slide.setAttribute("tabindex", "0");
+          currentIndex = index;
+
+          // Overlay animations depending on slide
+          if (slide.id === "slide1") {
+            // overlay fullscreen appears after 500ms delay
+            slide.classList.remove("overlay-visible");
+            setTimeout(() => {
+              slide.classList.add("overlay-visible");
+            }, 500);
+          } else if (slide.id === "slide2") {
+            // Sesuaikan timing animasi berdasarkan ukuran layar
+            const isMobile = window.innerWidth <= 480;
+            const delay1 = isMobile ? 200 : 300;
+            const delay2 = isMobile ? 350 : 500;
+            const delay3 = isMobile ? 300 : 400;
+
+            setTimeout(() => {
+              slide.classList.add("left-panel-visible");
+
+              setTimeout(() => {
+                slide.classList.add("left-content-visible");
+
+                setTimeout(() => {
+                  slide.classList.add("center-divider-visible");
+
+                  setTimeout(() => {
+                    slide.classList.add("right-panel-visible");
+
+                    setTimeout(() => {
+                      slide.classList.add("right-content-visible");
+                    }, delay2);
+                  }, delay3);
+                }, delay3);
+              }, delay2);
+            }, delay1);
+          } else if (slide.id === "slide3") {
+            // overlay animates with slide entrance
+            // handled by CSS animation tied to .active class
+          } else if (slide.id === "slide4") {
+            slide.classList.remove("overlay-visible");
+            setTimeout(() => {
+              slide.classList.add("overlay-visible");
+            }, 400);
+          }
+        }
+
+        // Automatic slide advancing
+        function startSlideShow() {
+          stopSlideShow(); // Clear any existing interval
+          slideInterval = setInterval(() => {
+            showSlide(currentIndex + 1);
+          }, slideDuration);
+        }
+
+        function stopSlideShow() {
+          if (slideInterval) {
+            clearInterval(slideInterval);
+          }
+        }
+
+        // Event listeners
+        openBtn.addEventListener("click", () => {
+          // Start opening animation
+          landingPage.style.animation = "fadeOut 1s forwards";
+
+          setTimeout(() => {
+            landingPage.style.display = "none";
+            slider.style.display = "flex";
+            slider.style.animation = "fadeIn 1.5s forwards";
+
+            // Show first slide
+            showSlide(0);
+            startSlideShow();
+
+            // autoplay music start immediately on open
+            audio
+              .play()
+              .then(() => {
+                musicBtn.setAttribute("aria-pressed", "true");
+                setPauseIcon();
+              })
+              .catch(() => {
+                musicBtn.setAttribute("aria-pressed", "false");
+                setPlayIcon();
+              });
+          }, 800);
+        });
+
+        prevBtn.addEventListener("click", () => {
+          stopSlideShow();
+          showSlide(currentIndex - 1);
+          startSlideShow();
+        });
+
+        nextBtn.addEventListener("click", () => {
+          stopSlideShow();
+          showSlide(currentIndex + 1);
+          startSlideShow();
+        });
+
+        musicBtn.addEventListener("click", () => {
+          if (audio.paused) {
+            audio.play();
+            musicBtn.setAttribute("aria-pressed", "true");
+            setPauseIcon();
+          } else {
+            audio.pause();
+            musicBtn.setAttribute("aria-pressed", "false");
+            setPlayIcon();
+          }
+        });
+
+        locationBtn.addEventListener("click", () => {
+          window.open("https://maps.app.goo.gl/rvvafqdujQbSMUnR6", "_blank");
+        });
+
+        // Keyboard shortcuts for slides
+        document.addEventListener("keydown", (e) => {
+          if (slider.style.display === "flex") {
+            if (e.key === "ArrowLeft") {
+              e.preventDefault();
+              prevBtn.click();
+            } else if (e.key === "ArrowRight") {
+              e.preventDefault();
+              nextBtn.click();
+            }
+          }
+        });
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slider.addEventListener(
+          "touchstart",
+          (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+          },
+          false
+        );
+
+        slider.addEventListener(
+          "touchend",
+          (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+          },
+          false
+        );
+
+        function handleSwipe() {
+          if (touchEndX < touchStartX - 50) {
+            // Swipe left
+            nextBtn.click();
+          }
+          if (touchEndX > touchStartX + 50) {
+            // Swipe right
+            prevBtn.click();
+          }
+        }
+
+        // Icon updates
+        function setPlayIcon() {
+          iconPath.setAttribute("d", icons.play);
+          iconWave.style.opacity = 0;
+        }
+
+        function setPauseIcon() {
+          iconPath.setAttribute("d", icons.pause);
+          iconWave.style.opacity = 1;
+        }
+
+        // Add fadeIn/fadeOut animations
+        const style = document.createElement("style");
+        style.textContent = `
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
@@ -1301,14 +1698,13 @@
           to { opacity: 0; }
         }
       `;
-      document.head.appendChild(style);
+        document.head.appendChild(style);
 
-      // Initialization
-      createFlowerPetals();
-      updateGuestName();
-      setPlayIcon();
-
-    })();
-  </script>
-</body>
+        // Initialization
+        createFlowerPetals();
+        updateGuestName();
+        setPlayIcon();
+      })();
+    </script>
+  </body>
 </html>
